@@ -47,4 +47,78 @@ Extreme Point
 
 ---
 
-Lecture 3 : 
+Lecture 3 : 13/01/2025
+
+Functions
+f : \mathbb{R} \to \mathbb{R}, y = f(x)
+Ex f(x) = ax
+
+Continuity at a point
+f is continuous at x_0 if \forall \epsilon>0 \exists \delta>0
+such that, 
+|f(x) - f(x_0)|< \epsilon \implies |x - x_0| < \delta.
+-Extension-
+d(f(x), f(x_0))<\epsilon \implies d(x, x_0)< \delta
+
+
+Equality is defined in terms of inequality
+x = y 
+1 + 1/2 + 1/4 + 1/8 + ... = 2
+|x-y|<\epsilon , \forall \epsilon>0
+
+f:\mathbb{R}\to\mathbb{R}
+f(x) = x^2
+Minimum is in domain
+Minimum value is in range
+Local minimum vs global minimum
+
+f(x) = (x-1)^2 
+f(x) = (x-1)^2 + 5
+f(x) = (x-1)^2 + (x+1)^2
+f(x) = 2*x^2
+f(x) = -x^2
+
+
+
+f(x) = ax^2 a>0/ a<0
+Derivative df/dx = 4x = 0 ??
+Double derivative d^2f/dx^2 = -2
+
+f(x) = x^Tx, x\in \mathbb{R^2}
+    = [x_1 x_2][x_1 x_2]^T
+    = x_1^2 + x_2^2
+f(x) = x^TAx, x\in \mathbb{R^2}, A\in \mathbb{R^{2x2}}
+A = [1 0; 0 3];
+A = [-1 0; 0 -3];
+A = [1 0; 0 -3];
+---
+Matlab (for plotting):
+clear all;
+close all;
+x = [-10:.5:10];
+A = [1 0; 0 -1];
+for i = 1:length(x)
+    for j = 1:length(x)
+        f(i,j) = [x(i) x(j)]*A*[x(i) x(j)]';
+    end
+end
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
