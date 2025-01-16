@@ -104,6 +104,88 @@ for i = 1:length(x)
 end
 ---
 
+Lecture 4 : 15/01/2025
+
+What if A has only one non-zero eigenvalue?
+A = [1 0; 0 0]
+f(x_1,x_2) = x_1^2
+Another way to look at functions of two variables: 
+Contour plot/ Level Set
+
+f:\mathhb{R^n} \to \mathbb{R}
+Lf(v) = {x | f(x)=v, x\in \mathbb{R^2}}
+
+Important Concepts : Optimization
+(A) Convexity
+- Newton's Method (First & Second Derivatives)
+- Gradient Method (First Derivative only)
+ 
+(B) Lagrange Multipliers
+- Theory of Duality
+
+(C) Linear Program, Quadratic Program, SDP, Cone Programming
+
+Argmin/ Min
+argmin f(x) = value(s) of x where f reaches minimum
+
+One variable: 
+
+f(x), f'(x)=df/dx, ..., f^n(x) = (d/dx)^nf
+f(x+dx) = f(x) + dx f'(x) + (1/2) (dx)^2 f''(x) + ... 
+f(x+dx) ~ f(x) + dx f'(x) + (1/2) (dx)^2 f''(x) 
+
+Two variables:
+f : \mathbb{R^n} \to \mathbb{R}
+f(x) := f(x_1,x_2)
+f'(x) = Grad f(x) = [f_1(x) f_2(x)]' := Gf
+f''(x) = [f_11(x) f_21(x); f_12(x) f_22(x)]' (Hessian of f) := Hf
+f_21(x) = d/dx_2 (f_1(x)), where f_1(x) = d/dx_1 (f(x))
+
+f(x+dx) ~ f(x) + dx f'(x) + (1/2) (dx)^2 f''(x) 
+f(x+dx) ~ f(x) + dx^T Gf(x) + (1/2) dx^T Hf(x) dx
+
+Ax = \lamda x
+d/dx (e^ax) = a*(e^ax)
+
+sin(2*pi*f*t) = (1/2i) * [e^(i*2*pi*f*t) - e^(-i*2*pi*f*t)]
+d/dt (sin(2*pi*f*t)) = (pi*f) [e^(i*2*pi*f*t) + e^(-i*2*pi*f*t)]
+ = (2*pi*f*e^(-i*pi/2)) sin(2*pi*f*t)
+
+* Code to rectify!
+clear all;
+close all;
+
+x = [-10:.5:10];
+A = [1 0; 0 1];
+
+
+for i = 1:length(x)
+    for j = 1:length(x)
+        f(i,j) = [x(i) x(j)]*A*[x(i) x(j)]';
+        df1(i,j) = 2*x(i);    
+        df2(i,j) = 2*x(j);
+     end
+end
+
+[x1,x2] = meshgrid(x,x);
+figure(1);
+contour(x1,x2,f); hold on;
+quiver(x1, x2, df1, df2);
+
+
+
+Jacobian: J(x)
+f : \mathbb{R^n} \to \mathbb{R^m}
+m functions (f_1, f_2,..., f_m)
+n variables (x_1, x_2, ..., x_n)
+
+f(x+dx) ~ f(x) + J_f(x) dx
+J_f(x) = [f_11 f_12 ... f_1n; f_21, ..., f_2n; ...; f_m1, ..., f_mn ]
+
+!! Hessian of a real function of n variables is Jacobian of the Gradient
+of the function.
+
+
 
 
 
