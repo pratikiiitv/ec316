@@ -185,10 +185,69 @@ J_f(x) = [f_11 f_12 ... f_1n; f_21, ..., f_2n; ...; f_m1, ..., f_mn ]
 !! Hessian of a real function of n variables is Jacobian of the Gradient
 of the function.
 
+---
 
+Lecture 5 : 20/01/2025
 
+Four fundamental subspaces of a Matrix
+A : \mathbb{R^m} \to \mathbb{R^n}
+A.shape = n x m
 
+Span of a set of vectors
+Rank of a Matrix - r
+- Number of independent columns
+- Number of independent rows
+- Number of nonzero eigenvalues
+- Dimension of column space
 
+Column space of A := {y | y = Ax, x\in \mathbb{R^n}}, Span{Col(A)}
+Left Null Space of A := {y | A^T y = 0, y\in \mathbb{R^m}}
+Null space of A := {x | Ax = 0, x \in \mathbb{R^n}}
+Row space of A := Span{Rows(A)}
+
+n = dim(Null(A)) + r 
+m = dim(Null(A^T)) + r
+
+Ax_1 = y_1
+Ax_0 = 0
+A(x_1+x_0) = Ax_1 + Ax_0 = y_1
+
+Gaussian Elimination
+Trace of a Matrix
+Singular Value Decomposition
+
+---
+Quadratic Unconstrained Optimization
+f : \mathbb{R^2} \to \mathbb{R}
+f(x) = x^T A x + b^T x + C
+A \in \mathbb{R^{2x2}}, b\in \mathbb{R^2}, c\in \mathbb{R}
+
+GD : First Attempt
+f, df, x_0
+x_{k+1} = x_k - step_size * df(x_k)
+|| x_{k+1} - x_k || < espilon
+
+Issues with stepsize and epsilon
+- convergence?
+- Gradient normalization?
+- Cauchy sequences and sequence convergence
+
+Neural Network
+Training Set := {x_i, y_i}, x_i\in \mathbb{R^m}, y_i\in \mathbb{R^n}
+f(x_i, \theta ) = y_i, \forall i \in \indx{Training Set} 
+
+minimize \Sum_i ||f(x_i, \theta) - y_i||
+f(x_i, a, b) = a*x_i + b
+||f(x_i, \theta) - y_i||
+\Sum_i (a*x_i + b - y_i)^2 
+\phi(a,b) = x_i^2 * a^2 + b^2 + y_i^2 + 2*a*b*x_i - 2*a*x_i*y_i - 2*b*y_i
+
+Q: Given three points in \mathbb{R^2}, {[1,  1], [2, 3], [4, 4]} 
+1. Draw a straight line passing through these three points. 
+2. Think of the points as [x_i, y_i] pairs. And straight line as a function 
+relationship betwen x_i and y_i, such that f(x_i) = y_i
+3. Write down the quadratic cost function.
+4. Try solving the same using First Attempt GD.
 
 
 
