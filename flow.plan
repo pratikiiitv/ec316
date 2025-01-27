@@ -249,6 +249,171 @@ relationship betwen x_i and y_i, such that f(x_i) = y_i
 3. Write down the quadratic cost function.
 4. Try solving the same using First Attempt GD.
 
+---
+
+Lecture 6 : 22/01/2025
+
+Vector Space
+- Linear Combinations
+- Linear Independence of a set of vectors
+- Functions from vector space to vector space
+- Dimensionality of vector space
+- Set of basis vector := basis
+- Finite Dimensional Vector Space
+- Representation theorem: Every linear function from FDV to FDV
+- Linear functions as matrices
+- Subspaces related to Matrix (Rol, Col, Null, Left Null)
+
+Inner Product Space
+- Orthogonality
+- <x|y>, x,y \in V (Inner product)
+- |x><y|, outer Product
+
+Normed Vector Space
+Shape of Vector Norms!
+\mathcal{C}(\mathbb{R}) : {Set of all continuous real functions
+on \mathbb{R}}
+
+\mathcal((0,1))
+
+- L_p (Lebesgue Integration)
+- l_p  
+
+V:=\mathbb{R^n}
+l_p(v) = (sum_i (|v_i|)^p)^{1/p}
+
+- circle -> sphere
+- disk -> ball
+- open disk -> open ball
+
+* (0,1) [0,1) [0,1]
+
+Ex: n=2, p=2
+?{v | l_p(v) = 1} : = {v_1^2+v_2^2 = 1} (circle)
+?{v | l_p(v) <= 1} is convex
+
+Ex: n=2, p=1
+?{v | l_p(v) <= 1} is convex
+l_1(v) = sum_i abs(v_i)
+
+Ex: n=2, p=3
+?{v | l_p(v) <= 1} is convex
+
+Ex: n=2, p=\infinity
+l_\infinity(v) = sup(abs(v_i))
+A = {0.1, .5, .7} 
+A = {0, 1-1/2, 1-1/3, ..., 1-1/n, ... }
+sup := least upper bound
+
+Ex: n=2, p=0
+?l_0(v) = 2
+l_0(v) = |support(v)|
+Sparsity norm * (misnormer)
+
+Ex:
+u = [1 2 3] 
+v = [1 1 1]
+p = {0, 1, 2, \inf }
+||u-v||_p = {2, 3, sqrt(5), 2}
+
+Ex:
+S = {x | x_1+x_2 = 3}
+Find a point in S closest to [0 0] 
+w.r.t. p norms p:={0,1,2,\inf}
+
+Limit points and boundary
+
+---
+
+Lecture 7 : 27/01/2025
+
+A point is said to be inside the set (interior points) if
+it has a neighborhood in the set.
+
+Strict convexity (< inplace of <=)
+
+Projection : P 
+In the context of vector spaces - we have looked at 
+projections on subspaces, i.e. hyperplanes passing through
+origin
+
+Ex. In \mathbb{R^2}, a^Tx = 0 a,x \in \mathbb{R^2}
+a = [1 1]' - 1 D
+a = [1 1 1]' - 2 D 
+a = [1 1 1 1]' - 3 D 
+
+Ex. Find a closest (l_2) point to origin on a^Tx+b=0, for a = [1 1 1]' 
+in \mathbb{R^3} where b = 1
+
+min ||x||^2
+(A) s.t. a^Tx+b <= 0
+(B) s.t. a^Tx+b >= 0
+(C) s.t. a^Tx+b = 0
+
+min x_1^2+x_2^2+x_3^2
+s.t. x_1+x_2+x_3 + 1 = 0
+
+<a|x> = a^Tx 
+
+x=c*a such that this will be in a^Tx+b=0
+a^T(c*a) + b = 0
+c = -b/(a^Ta)
+x = (-b/(a^Ta)) * a
+x = (-b/||a||) * a_unit
+
+Q Find a closest (l_2) point (wrt origin) on a^Tx+b=0, for a = [1 1 1]' 
+in \mathbb{R^3} where b = 1
+min ||x-[0 0 0]'||^2
+s.t. a^Tx+b = 0
+Ans: x = (-b/||a||) * a_unit
+
+Q Find a closest (l_2) point (wrt x_0=[2 3 4]') on a^Tx+b=0, for a = [1 1 1]' 
+in \mathbb{R^3} where b = 1
+min ||x-x_0'||^2
+s.t. a^Tx+b = 0
+Ans is called projection of x_0 onto S:={x | a^Tx+b=0}
+y = x-x_0'
+min ||y||^2
+s.t. a^T(y+x_0') + b =0
+s.t. a^Ty + (b+a^Tx_0') = 0
+s.t. a^Ty + b_ = 0
+y = (-b_/a^Ta) * a
+y = (-b-a^Tx_0 / a^Ta) * a
+y = (-b/(a^Ta)) * a - (a_unit^Tx_0) * a_unit 
+
+Quiz : Code
+S_1 := {x | a^Tx + b = 0}
+S_2 := {x | c^Tx + d = 0}
+a, c \in \mathbb{R^2}, b, d \in \mathbb{R}
+
+Start from x_0 and and sequentially project on S_1 and S_2 
+till convergence
+1. x_k := Projection of x_k-1 on S_1
+2. x_k+1 := Projection of x_1=k on S_2 
+
+A point, a convex set, a strict norm, and we get 
+a unique projection!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
