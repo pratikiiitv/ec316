@@ -394,6 +394,75 @@ till convergence
 A point, a convex set, a strict norm, and we get 
 a unique projection!
 
+---
+Lecture 8 : 29/01/2025
+
+{x_k}, k\in{0,1,...}
+Rate of convergence: 
+||x_k-x_{k-1}||/||x_{k-1}-x_{k-2}||
+
+<x|y> = conjugate(x)^T * y, if x,y\in \mathbb{C}^n 
+Visual Complex Analysis, Tristan Needham
+
+*Neural Network - Learning Weights
+
+min f(x)
+s.t. <a|x>=b : S_1
+
+f(x) = x^TAx, x\in\mathbb{R}^2
+A = [1 1, 1 3];
+a = [-1 3]^T;
+b = 4;
+
+Projected Gradient Descent
+Initialize - x_0, lamda = 0.1
+Step 1: x_1 = Project_S_1(x_0)
+Step 2: x_2 = x_1 - 0.1*grad(f(x_1))
+Repeat 
+
+Matrix Derivatives
+f(x), f'(x) 
+f(x) = ax^2, f'(x) = 2*ax
+f(x) = x^TAx, f'(x) = 2*A^Tx, if A is symmetric
+
+f(x) = [x1 x2] * A * [x1 x2]^T 
+= [x1a11+x2a21 x1a12+x2a22] * [x1 x2]^T 
+= x1a11x1+x2a21x1+x1a12x2+x2a22x2
+
+df/dx1 = 2a11x1 + (a21 + a12)x2 
+df/dx2 = a21x1 + a12x1 + 2a22x2
+
+df/dx = [2a11 a12+a21; a21+a12 2a22] * [x1 x2]^T
+if A is symmetric a12 = a21
+df/dx = 2[a11 a21; a12 a22]*x
+
+(Matrix Cookbook!)
+
+Single Neuron
+x -> f_{w,b}() -> sigma(<x|w>+b)
+{x_i, y_i} i\in I Training set
+{{[1 1],  1}, {[2 3], 1}, {[-1 0], -1}}
+sigma(x) = x 
+
+min ||y_1 - f_{w,b}(x_1)|| + ...
+s.t. ||w||=1
+
+\phi(x,y) = ||y-f(x)||
+min \phi(x_1,y_1) + \phi(x_2,y_2) + ...
+
+min \phi_1(w,b) + \phi_2(w,b) + \phi_3(w,b) + ...
+s.t ||w||=1
+
+Initialization : x_0, 
+Till convergence
+for i=1:3
+Step 1: x_1 = x_0 - lamda * grad(\phi_i)
+Step 2: x_2 = Project_S_1(x_1)
+Repeat
+
+---
+
+
 
 
 
