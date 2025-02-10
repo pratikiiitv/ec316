@@ -462,6 +462,84 @@ Repeat
 
 ---
 
+Lecture 9 : 10/02/2025
+
+Ex. 
+min 1/2 x^2
+s.t 2x >= 1
+
+(Dual Variable - \alpha)
+
+L(x,\alpha) = 1/2 x^2 + \alpha (-2x+1), \alpha>=0
+? max L(x,\alpha)
+s.t. \alpha >= 0
+x \in feasible, what is \alpha? \alpha = 0
+max L(x,0) = 1/2 x^2 -> objective function!
+x \in infeasible, what is \alpha? \alpha = \infinity
+max L(x,\infinity) = \infinity
+
+min     max     L(x, \alpha)
+x       \alpha>=0 
+
+max     min     L(x, \alpha)
+\alpha>=0 x
+
+
+L(x,y) = [4 2; 1 3]
+min max L = 3  
+x    y
+max min L = 2
+y    x
+
+Claim: max min L(x,y) <= min max L(x,y)
+        y   x             x   y
+
+        sup inf L(x,y) <= inf sup L(x,y)
+
+sup = Least upper bound
+inf = Greatest lower bound
+
+Ex.
+min 1/2 (w_1^2+w_2^2)
+s.t. y_i (w_1 x_i1 + w_2 x_i2 + 1) >= 1
+
+L(w,\alpha) = 1/2 (w_1^2+w_2^2 )
+            + \alpha_1 (-w_1-w_2) + \alpha2 (-w_1-w_2+2)
+
+w_1 = \alpha_1 + \alpha_2
+w_2 = \alpha_1 + \alpha_2
+
+L(\alpha) = - \alpha_1^2 - \alpha_2^2 - 2\alpha_1 \alpha_2 + 2 \alpha_2
+
+-2\alpha_1 - 2\alpha_2 = 0
+-2\alpha_2 - 2\alpha_1 + 2 = 0
+
+D := {(x_i,y_i)}_i\in I
+D := {([1,1],1), ([-1,-1],-1)} 
+
+w_1+w_2>=0 | < w | [1 1] > >= 0
+w_1+w_2>=2 | < w | [1 1] > >= 2
+
+max     min     L(w, \alpha) 
+alpha   w 
+>=0
+
+
+
+
+General Constrained Optimization Problem
+
+minimize f(w)
+s.t.    g_i(w)<=0, i=1,...,k
+        h_i(w)=0, i=1,...,l
+
+L(w, \alpha, \beta) 
+    = f(w) + sum_i \alpha_i g_i(w) + sum_i \beta_i h_i(w)
+
+
+
+
+
 
 
 
