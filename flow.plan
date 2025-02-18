@@ -524,9 +524,6 @@ max     min     L(w, \alpha)
 alpha   w 
 >=0
 
-
-
-
 General Constrained Optimization Problem
 
 minimize f(w)
@@ -536,15 +533,69 @@ s.t.    g_i(w)<=0, i=1,...,k
 L(w, \alpha, \beta) 
     = f(w) + sum_i \alpha_i g_i(w) + sum_i \beta_i h_i(w)
 
+---
 
+Lecture 10 : 17/02/2025
 
+Ex:
+min 1/2 (w_1^2+w_2^2)
+s.t. y_i (w_1 x_i1 + w_2 x_i2) >= 1
 
+D := {(x_i,y_i)}_i\in I
+D := {([1,1],1), ([-1,-1],-1)} 
 
+Linear Programming : Simplex Method
 
+Ex. 
+minimize -x_1-x_2
+s.t. x_1 + 2x_2 <= 3
+2x_1 + x_2 <= 3
+x_1, x_2 >= 0
 
+min <c|x>
+s.t. Ax >= b (#m)
+x >= 0 (#n)
+x\in \mathbb{R}^n
+P  - feasible set 
+A \in \mathbb{R}^{m\times n}
+Rows of matrix A are linearly independent
+A_i -> ith column of A 
+a'_i -> ith row of A 
 
+Definition:
+Let x be an element of a polyhedron P. A vector d\in\mathbb{R}^n is
+said to be a feasible direction at x, if there exists a positive 
+scalar \theta for which x+\theta d \in P.
 
+Definition:
+Let P be a polyhedron. A vector x\in P is a vertex of P if there
+exists some c such that <c|x> < <c|y> for all y satisfying y\in P and 
+y \neq x.
 
+P \subset \mathbb{R}^n
+<a_i|x> >= b_i ; i\in M_1
+<a_i|x> <= b_i ; i\in M_2
+<a_i|x> = b_i ; i\in M_3
+
+Definition:
+If a vector x satisfies <a_i|x> = b_i for some i in M_1, M_2 or M_3,
+we say that the corresponding constraint is active or binding at x.
+
+Definition:
+The vector x is a basic solution if:
+(i) all equality constraints are active;
+(ii) out of the constraints that are active at x, there are n of
+them that are linearly independent.
+
+*If x is a basic solution that satisfies all of the constraints,
+we say that it is a basic feasible solution.
+
+Let x  be a basic feasible solution to the standard form problem,
+let B(1),...,B(m) be the indices of the basic variables, and let
+BB = [A_B(1) ... A_B(m)] be the corresponding basis matrix.
+(in particular x_i = 0 for every nonbasic variables)
+
+x_B = inv(BB) b (vector of basic variables).
 
 
 
