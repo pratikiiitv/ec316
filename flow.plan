@@ -597,16 +597,98 @@ BB = [A_B(1) ... A_B(m)] be the corresponding basis matrix.
 
 x_B = inv(BB) b (vector of basic variables).
 
+---
+Lecture 11 : 19/02/2025
 
+Projections of polyhedra:
 
+[1] P = {x | Ax >= b, x\in\mathbb{R}^n}
+[2] P = {x' | Ax' = b, x'>=0, x'\in \mathbb{R}^n}
+(Standard form of polyhedron)
 
+Ex:
+P : = {2x_1 + x_2 >= 3, x_1 + 2x_2 >= 7, x1 + x2 <=10}
+\pi_2{P} ?
+Graphically!
+Algebraically? (Eliminate x_1)
+x_1 >= -x_2/2 + 3/2 
+x_1 >= -2x_2 + 7
+10 - x_2 >= x_1
+==
+10 - x_2 >= -x_2/2 + 3/2
+10 - x_2 >= -2x_2 + 7
+==
+x_2 <= 17
+x_2 >= -3
+==
+-3 <= x_2 <= 17
+Question: \pi_1{P} = {-7 <= x_1 <= 13}
 
+Equivalent (additional variables!)
+2x1 + x2 - x3 = 3
+x1 + 2x1 - x4 = 7
 
+Definition: Projection \pi_k : \mathbb{R}^n \to mathbb{R}^k
+will project x onto its first k coordinates:
+\pi_k(x) = \pi_k(x_1,...,x_n) = (x_1,...,x_k)
 
+\pi_k(S) = {\pi_k(x) | x\in S}
 
+Note: S is nonempty iff \pi_k(S) is nonempty.
 
+Ex: 
+P={x_1 + x_2 >= 1,
+x_1 + x_2 + 2x_3 >= 2,
+2x_1 + 3x_3 >= 3,
+x_1 - 4x_3 >= 4,
+-2x_1 + x_2 - x_3 >= 5}
+Q: Is the polyhedron nonempty?
+\pi_3(P)
+                    0   >= 1 - x_1 - x_2
+                    x_3 >= 1 - x_1/2 - x_2/2
+                    x_3 >= 1 - 2x_1/3
+x_1/4 - 1       >=  x_3
+-2x_1 + x_2 - 5 >=  x_3
+===
+            0   >= 1 - x_1 - x_2
+x_1/4 - 1       >= 1 - x_1/2 - x_2/2
+x_1/4 - 1       >= 1 - 2x_1/3
+-2x_1 + x_2 - 5 >= 1 - x_1/2 - x_2/2
+-2x_1 + x_2 - 5 >= 1 - 2x_1/3 
+===
+x_1 >= 1 - x_2
+x_1 >= 8/3 - 2x_2/3 
+x_1 >= 24/11
+x_2 - 4 >= x_1
+3x_2/4 - 9/2 >= x_1
+===
+x_2 - 4 >= 1 - x_2
+x_2 - 4 >= 8/3 - 2x_2/3 
+x_2 - 4 >= 24/11
+3x_2/4 - 9/2 >= 1 - x_2
+3x_2/4 - 9/2 >= 8/3 - 2x_2/3 
+3x_2/4 - 9/2 >= 24/11
+===
+x_2 >= 98/11
 
+* Fourier-Motzkin Elimination
 
+Observations:
+[1] Let P\subset \mathbb{R}^{n+k} be a polyhedron, then
+{x\in \mathbb{R}^n | \exists y\in \mathbb{R}^k, s.t. (x,y)\in P}
+is also a polyhedron.
+
+[2] Let P\subset \mathbb{R}^n be a polyhedron and 
+let A\in\mathbb{R}^{m\times n} then
+Q = { Ax | x\in P} is a polyhedron.
+
+Suppose the polyhedron P = {x\in \mathbb{R}^n | Ax>=b, A_{mxn}} is
+nonempty,
+The following are equivalent:
+1. The polyhedron P does not contain a line
+2. The polyhedron P has atleast one extreme point
+3. There exists n vectors out of the family a_1,...,a_m which are 
+linearly independent.
 
 
 
