@@ -699,7 +699,7 @@ linearly independent.
 
 ---
 
-March 3, 2025
+Lecture 12: March 3, 2025
 
 Mid-sem Review
 Q1 y_1, y_2 \in S_1
@@ -752,7 +752,7 @@ x = [4 4 4 0 0 0]^T
 
 ---
 
-March 4, 2025
+Lecture 13: March 4, 2025
 
 Simplex (Naive Attempt)
 minimize -4 x_1 - 3 x_2
@@ -832,20 +832,112 @@ AD = 0 (D is in the null space of A)
 A(0,d,-3d,-2d,-2d,-d)=0
 d=min(6/3, 3/2, 5/2, 4) and d>=0
 d = 3/2
+x_ = (0,3/2, 3/2, 0, 2, 5/2)
+
+-----
+March 17, 2025
+Lecture 14:
 x = (0,3/2, 3/2, 0, 2, 5/2)
+x+D = (d, 3(1+d)/2, (3-13d)/2, 0, (2-3d), (5-7d)/2)
+d = 3/13
+x+D = x_ = (3/13, 24/13, 0, 0, 2-9/13, 5/2-21/26)
 
+Question?
+Basic feasible solution : Point A : x = (0,0,6,3,5,4)
+along x_2 point B -> (0,3/2,3/2,0,2,5/2) -> -9/2
+along x_1 point E -> (2,0,2,9,5,0) -> -8
+Quiz: What if we travel along x_2 starting from E?
 
+Simplex Example:
+minimize -10 x_1 - 12 x_2 - 12 x_3
+subject to 
+        x_1 + 2 x_2 + 2 x_3 <= 20
+        2 x_1 + x_2 + 2 x_3 <= 20
+        2 x_1 + 2 x_2 + x_3 <= 20
+        x_1, x_2, x_3 >= 0
+subject to
+        x_1 + 2 x_2 + 2 x_3 + x_4 = 20
+        2 x_1 + x_2 + 2 x_3 + x_5 = 20
+        2 x_1 + 2 x_2 + x_3 + x_6 = 20
+        x_1, x_2, x_3, x_4, x_5, x_6 >= 0
+(0,0,0,20,20,20)
+        x_1     x_2     x_3     x_4     x_5     x_6
+    0   -10     -12     -12     0       0       0    
+----------------------------------------------------
+x_4 20  1       2       2       1       0       0
+x_5 20  2       1       2       0       1       0
+x_6 20  2       2       1       0       0       1    
+
+An iteration:
+1. We start with a basis consisting of the basic columns
+A_B(1), ..., A_B(m), an associated basic feasible solution
+x, and the inverse B^{-1} of the basis matrix.
+
+2. Compute the row vector p'= c_B' B^{-1} and then Compute
+the reduced costs c_j_ = c_j - p' A_j. If they are all 
+nonnegative, the current basic feasible solution is optimal,
+and the algorithm terminates; else, choose some j for which
+c_j_ < 0.
+
+3. Compute u = B^{-1} A_j. If no component of u is positive,
+the optimal cost is -\infinity, and the algorithm terminates.
+
+4. If some component of u is positive, let
+\theta* = min x_B(i)/u_i, {i=1,..,m | u_i>0}
+
+5. Let l be such that \theat* = x_B(l)/u_l. Form a new basis
+by replacing A_B(l) with A_j. If y is the new basic feasible
+solution, the values of the new basic variables are y_j = \theta*
+and y_B(i) = x_B(i)-\theta* u_i, i\neq l.
+
+-----
+Lecture 15:
 
 Duality (Just for illustration, one of many interpretations)
--------
+
 Ex: Transportation Graph:= (V,E)
 ({A, B, C, D}, {AB-1, AC-2, BC-3, BD-4, CD-5})
-Unit cost of moving goods along edges c_i
+Some good is available at A with no cost.
+Cost of moving a unit of good along edges c_i
 At each vertex b_v units of goods are sold. 
 Question: How can the transport be done most efficiently?
 
+Let x_i denote the amount of good tranported through channel i.
+(Primal Problem - P)
+minimize c'x 
+subject to
+    x_1 - x_3 - x_4 = b_B
+    x_2 + x_3 - x_5 = b_C
+    x_4 + x_5 = b_D
+    x_1 + x_2 = b_B + b_C + b_D # need not include explicitly
+    x_i >= 0
 
+Let y_v denote the unit price of the good at node v
+(Dual Problem - D)
+maximize b'y
+subject to
+    y_B - y_A <= c_1
+    y_C - y_A <= c_2
+    y_C - y_B <= c_3
+    y_D - y_B <= c_4
+    y_D - y_C <= c_5
 
+Claim:
+Assume that x is a feasible vector for the primal problem (P)
+and y is a feasible vector for the dual problem (D).
+i. b'y <= c'x
+ii. if equality holds in (i), then x and y are optimal for 
+their respective linear programming problems
+
+(P) minimize c'x subject to Ax  >= b, x>=0
+(D) maximize b'y subject to A'y <= c, y>=0
+
+Ax >= b
+A'y <= c 
+y'Ax >= y'b --- (A)
+(y'A) <= c'
+y'Ax <= c'x --- (B)
+y'b <= c'x
 
 
 
