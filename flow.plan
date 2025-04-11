@@ -885,7 +885,7 @@ the optimal cost is -\infinity, and the algorithm terminates.
 4. If some component of u is positive, let
 \theta* = min x_B(i)/u_i, {i=1,..,m | u_i>0}
 
-5. Let l be such that \theat* = x_B(l)/u_l. Form a new basis
+5. Let l be such that \theta* = x_B(l)/u_l. Form a new basis
 by replacing A_B(l) with A_j. If y is the new basic feasible
 solution, the values of the new basic variables are y_j = \theta*
 and y_B(i) = x_B(i)-\theta* u_i, i\neq l.
@@ -939,24 +939,186 @@ y'Ax >= y'b --- (A)
 y'Ax <= c'x --- (B)
 y'b <= c'x
 
+----
+
+Lecture 16:
+02/04/2025
+
+Exercise 3.12
+Minimize    -2 x_1 - x_2
+subject to  
+            x_1 - x_2 <= 2
+            x_1 + x_2 <= 6
+            x_1, x_2 >= 0
+
+a. Convert the problem into standard form and construct a basic feasible solution at 
+which (x_1,x_2) = (0,0)
+b. Carry out the full tableau implementation of the simplex method, starting 
+with the basic feasible solution of part a.
+c. Draw a graphical representation of the problem in terms of the original 
+variables x_1, x_2, and indicate the path taken by the simplex method.
 
 
- 
+---
+
+Lecture 17:
+07/04/2025
+
+Integer Programming:
+
+The owner of a machine shop is planning to expand by purchasing some new machines-
+presses and lathes. The owner has estimated that each press purchased will increase
+profit by INR 100 per day and each lathe will increase profit by INR 150 daily.
+The number of machines that the owner can purchase is limited by the cost of the
+machines and the available floor space in the shop. The machine purchase prices and
+space equipments are as follows.
+
+Press - 15 sq ft - INR 8000
+Lathe - 30 sq ft - INR 4000
+
+The owner has a budget of INR 40000 for purchasing the machines and 200 sq ft of
+available floor space. The owner wants to know how many of each type of machine to
+purchase to maximise the daily increase in profit.
+
+Root Node :: LP0: x_1 - number of presses, x_2 - number of lathes
+Maximize Z = 100 x_1 + 150 x_2
+Subject to
+            8000 x_1 + 4000 x_2 <= 40000
+            15 x_1 + 30 x_2 <= 200
+            x_1, x_2 >= 0 
+Sol: x_1 = 2.22    , x_2 = 5.56      , Z = 1055.56
+
+LP0
+UB: Z = 1055.56 (x_1 = 2.22, x_2 = 5.56)
+LB: Z = 950 (x_1 = 2, x_2 = 5)
+
+LP11 : x_2 <= 5                     LP12 : x_2 >= 6
+UB: Z = 1000 (x_1=2.5, x_2=5)       UB: Z = 1033 (x_1 = 1.33, x_2 = 6)
+LB: Z = 950 (x_1=2, X_2=5)          LB: Z = 950 (x_1=2, X_2=5)
+
+LP21: x_1<=2     LP22: x_1>=3       LP23: x_1<=1    LP24: x_1>=2
+                                    UB:1025.50      Not Feasible!
+                                    (1, 6.17)             
+                                    LB:950
+                                    (2, 5)  
+
+                                    LP31: x_2<=6    LP32: x_2>=7
+                                    UB:1000         Not Feasible!
+                                    (1, 6)
+                                    LB:1000
+                                    (1, 6) 
+
+Goal Programming:
+
+Objective: maximize Z = 2 x_1 + 3 x_2
+Goal: 2 x_1 + 3 x_2 >= 40000 (aspiration level)
+Objective function along with its aspiration level is called a Goal.
+
+Example:
+Profit - maximize Z_1 = 2 x_1 + 3 x_2
+Cost - minimize Z_2 = x_1 + 5 x_2
+Subject to
+x_1 + x_2 <= 10
+x_1 - x_2 <= 4
+x_1, x_2 >= 0
+
+Aspiration levels: 
+Profit of at-least 40000, cost should not exceed limit of 20000
+
+2 x_1 + 3 x_2 >= 40000 -> 2 x_1 + 3 x_2 + d_1n  = 40000
+x_1 + 5 x_2 <= 20000 -> x_1 + 5 x_2 - d_2p = 20000
+
+GP:
+minimize d_1n + d_2p
+subject to 
+2 x_1 + 3 x_2 + d_1n  = 40000
+x_1 + 5 x_2 - d_2p = 20000
+x_1 + x_2 <= 10
+x_1 - x_2 <= 4
+x_1, x_2, d_1n, d_2p >= 0
+
+** 2 x_1 + 3 x_2 = 40000 -> 2 x_1 + 3 x_2 - d_p + d_n = 40000
+
+Pre-emptive Goal Programming
+minimize {P_1 d_1n, P_2 d_2p}
+subject to 
+2 x_1 + 3 x_2 + d_1n  = 40000
+x_1 + 5 x_2 - d_2p = 20000
+x_1 + x_2 <= 10
+x_1 - x_2 <= 4
+x_1, x_2, d_1n, d_2p >= 0
+P_1 > P_2
 
 
+---
+Lecture 18
+09/04/2025
 
+Exercise:
+A company produces two kinds of fancy products, pen holder and paper tray.
+Production of either of them requires 1 hr production capacity in the plant. 
+The plant has a maximum production capacity of 12 hrs per week. 
+The maximum number of pen holders and paper trays that can be sold are 7 and 10 
+respectively. The gross margin from the sales of pen holder is Rs 90 and Rs 45 
+for a paper tray. The overtime hours should not exceed 3 hrs per week
+if required. The plant manager has set the following goals in order of importance:
+◦ 𝑃1: He wants to avoid any under-utilization of production capacity
+◦ 𝑃2: He wants to limit the overtime hours to 3 hrs
+◦ 𝑃3: He wants to sell as many pen holders and paper trays as possible. 
+Since the gross margin from the sale of a pen holder is set at twice the amount 
+of the profit from a paper tray, the manager has twice as much desire to achieve 
+the sales goal for pen holders as for paper trays.
+◦ 𝑃4: The manager wishes to minimize the overtime operation of the plant as much 
+as possible.
 
+x_1, x_2 - numbers of pen holders and paper trays produced per week
+G1: x_1 + x_2 + d_1n - d_1p = 12
+G2: d_1p - d_2p = 3
+G3: x_1 + d_3n = 7, x_2 + d_4n = 10
 
+minimize {P_1 d_1n, P_2 d_2p, P_3 (2 d_3n + d_4n), P_4 d_1p}
+subject to
+x_1 + x_2 + d_1n - d_1p = 12
+d_1p + d_2p = 3
+x_1 + d_3n = 7
+x_2 + d_4n = 10
+x_1, x_2, d_in, d_jp >= 0
 
+Ex:
+min {x_1^2 + x_2^2} subject to x_1 + x_2 = 1
+min {x_1^2, x_2^2} subject to x_1 + x_2 = 1
 
+min {x_1 + 2 x_2} subject to x_1 + x_2 = 1
+min {x_1, 2 x_2} subject to x_1 + x_2 = 1
 
+Quiz:
+Harrison Electric produces two products popular with home renovators, 
+old fashioned chandeliers and ceiling fans. Both chandeliers and fans 
+require a two-step production process involving wiring
+and assembly. It takes about 2 hrs to wire a chandelier and 3 hrs to 
+wire a fan. Final assembly of the chandelier and fan require 6 and 5 hrs 
+respectively. The production capability is such that only 12 hrs
+of wiring and 30 hrs of assembly time are available. Each chandelier 
+produced nets the firm $7 and each fan $6. The Harrison’s management 
+wants to achieve the following goals with the given priorities:
+◦ 𝑃1: Reach a profit as much above $30 as possible.
+◦ 𝑃2: Fully use wiring department hours available.
+◦ 𝑃3: Avoid assembly department overtime.
+◦ 𝑃4: Produce at-least 7 ceiling fans.
+Formulate and solve the above goal programming problem using graphical method.
 
+x_1, x_2 - numbers of c and f per week
+7 x_1 + 6 x_2 >= 30
+2 x_1 + 3 x_2 = 12
+6 x_1 + 5 x_2 <= 30
+x_2 >= 7 
 
-
-
-
-
-
-
+minimize {P1 d_1n, P_2 d_2n, P_3 d_3p, P_4 d_4n}
+Subject to:
+7 x_1 + 6 x_2 + d_1n = 30
+2 x_1 + 3 x_2 + d_2n - d_2p = 12
+6 x_1 + 5 x_2 - d_3p = 30
+x_2 + d_4n = 7
+x_i, d_jp, d_jn >= 0
 
 
